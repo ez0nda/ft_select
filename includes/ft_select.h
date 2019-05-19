@@ -6,7 +6,7 @@
 /*   By: ezonda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/15 15:07:52 by ezonda            #+#    #+#             */
-/*   Updated: 2019/05/18 12:25:09 by ezonda           ###   ########.fr       */
+/*   Updated: 2019/05/19 13:29:52 by ezonda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,9 @@
 
 typedef struct	s_var
 {
-	int	up;
-	int down;
-	int left;
-	int right;
-	int space;
-	int ret;
-	int esc;
-	int del;
-	int undo;
+	int pos;
+	int nb_args;
+	char **args;
 }				t_var;
 
 #endif
