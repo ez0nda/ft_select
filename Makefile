@@ -6,15 +6,23 @@
 #    By: ezonda <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/15 15:57:32 by ezonda            #+#    #+#              #
-#    Updated: 2019/05/15 16:05:49 by ezonda           ###   ########.fr        #
+#    Updated: 2019/05/22 10:22:32 by ezonda           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ft_select
 
 SRC = srcs/main.c \
+	  srcs/display.c \
+	  srcs/tools.c \
+	  srcs/select.c \
+	  srcs/move.c \
 
 OBJ = srcs/main.o \
+	  srcs/display.o \
+	  srcs/tools.o \
+	  srcs/select.o \
+	  srcs/move.o \
 
 LIB = libft/libft.a
 
