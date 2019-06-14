@@ -6,28 +6,29 @@
 /*   By: ezonda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/15 15:16:59 by ezonda            #+#    #+#             */
-/*   Updated: 2019/05/22 13:49:15 by ezonda           ###   ########.fr       */
+/*   Updated: 2019/06/14 13:34:46 by ezonda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_select.h"
 
-static void		hide_cursor(int mod)
+int		hide_cursor(int mod)
 {
 	char *res;
 
 	if (mod == 0)
 	{
 		if ((res = tgetstr("vi", NULL)) == NULL)
-			return ;
+			return (0);
 		tputs(res, 0, ft_putchar_v2);
 	}
 	else
 	{
 		if ((res = tgetstr("ve", NULL)) == NULL)
-			return ;
+			return (0);
 		tputs(res, 0, ft_putchar_v2);
 	}
+	return (0);
 }
 
 static int		return_selection(t_var *data)
@@ -55,17 +56,37 @@ static void		get_arrow(t_var *data, char c)
 		move_left(data);
 }
 
+
+void	set_termcanon(t_var *data)
+{
+	char buffer[256];
+
+	if (tgetent(buffer, getenv("TERM")) <= 0)
+		return ;
+	if (tcgetattr(0, &term) == -1)
+		return ;
+	term.c_lflag &= (~(ICANON | ECHO));
+	if (tcsetattr(0, TCSANOW, &term) == -1)
+		return ;
+	hide_cursor(0);
+	clear_display(data);
+	display(data);
+}
+
+
+
 static void		get_key(t_var *data)
 {
 	char buffer[6];
-	char *tmp;
+	char *res;
 
 	while (1)
 	{
+		set_termcanon(data);
 		ft_bzero(buffer, 6);
 		read(0, &buffer, sizeof(buffer));
 		if (buffer[0] == 27 && buffer[1] == 0)
-			exit(0);
+			exit(hide_cursor(1));
 		else if (buffer[0] == 27 && buffer[1] == 91)
 		{
 			if (buffer[2] == 51)
@@ -84,16 +105,18 @@ static void		get_key(t_var *data)
 
 int				main(int ac, char **av, char **env)
 {
-	struct termios	term;
+//	struct termios	term;
 	char			buffer[256];
 	t_var			data;
 
 	signal(SIGINT, signal_handler);
+//	signal(SIGCONT, signal_handler);
+//	signal(SIGTSTP, signal_handler);
 	if (!getenv("TERM"))
 		return (ft_printf("ft_select : environment not found\n"));
 	data.args = ft_tabdup(av);
 	init_data(&data);
-	if (tgetent(buffer, getenv("TERM")) <= 0)
+/*	if (tgetent(buffer, getenv("TERM")) <= 0)
 		return (ft_printf("ft_select : termcap database error\n"));
 	if (tcgetattr(0, &term) == -1)
 		return (-1);
@@ -102,7 +125,7 @@ int				main(int ac, char **av, char **env)
 		return (-1);
 	hide_cursor(0);
 	clear_display(&data);
-	default_display(&data);
+	default_display(&data);*/
 	get_key(&data);
 	hide_cursor(1);
 	return (return_selection(&data));

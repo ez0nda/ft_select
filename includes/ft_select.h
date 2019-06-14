@@ -6,7 +6,7 @@
 /*   By: ezonda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/15 15:07:52 by ezonda            #+#    #+#             */
-/*   Updated: 2019/05/22 12:54:18 by ezonda           ###   ########.fr       */
+/*   Updated: 2019/06/14 10:37:53 by ezonda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include <termcap.h>
 # include <termios.h>
 # include <signal.h>
+
+struct termios	term;
 
 typedef struct	s_var
 {
@@ -44,5 +46,7 @@ int		ft_putchar_v2(int c);
 void	free_tab(char **tab);
 char	**ft_tabdup(char **tab);
 void	init_data(t_var *data);
+
+int		hide_cursor(int mod);
 
 #endif

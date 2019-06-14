@@ -6,7 +6,7 @@
 #    By: ezonda <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/15 15:57:32 by ezonda            #+#    #+#              #
-#    Updated: 2019/05/22 10:22:32 by ezonda           ###   ########.fr        #
+#    Updated: 2019/05/23 16:33:23 by ezonda           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ LIB = libft/libft.a
 
 CC = gcc
 
-FLAGS = -Wall -Wextra -Werror -l termcap
+FLAGS = -Wall -Wextra -Werror -g -l termcap
 
 all: $(NAME)
 

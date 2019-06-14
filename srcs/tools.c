@@ -6,7 +6,7 @@
 /*   By: ezonda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 10:07:37 by ezonda            #+#    #+#             */
-/*   Updated: 2019/05/22 13:47:48 by ezonda           ###   ########.fr       */
+/*   Updated: 2019/06/14 13:34:34 by ezonda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 void	signal_handler(int signal)
 {
-	char *res;
-
+//	pid_t pid;
 	(void)signal;
-	if ((res = tgetstr("ve", NULL)) == NULL)
-		return ;
-	tputs(res, 0, ft_putchar_v2);
-	exit(0);
+//	ft_printf("\nsig : %d\n", signal);
+//	if (signal == 18)
+//		kill(pid, SIGTSTP);
+//	else
+		exit(hide_cursor(1));
 }
 
 int		ft_putchar_v2(int c)
@@ -61,10 +61,12 @@ char	**ft_tabdup(char **tab)
 
 void	init_data(t_var *data)
 {
-	data->selected = NULL;
 	data->nb_args = 0;
 	while (data->args[data->nb_args])
 		data->nb_args++;
+	if (!(data->selected = (char**)malloc(sizeof(char*) * (data->nb_args + 1))))
+		return ;
+	data->selected[0] = NULL;
 	data->nb_args--;
 	data->pos = 1;
 }
