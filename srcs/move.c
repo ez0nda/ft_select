@@ -6,7 +6,7 @@
 /*   By: ezonda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 10:19:29 by ezonda            #+#    #+#             */
-/*   Updated: 2019/05/23 18:06:50 by ezonda           ###   ########.fr       */
+/*   Updated: 2019/06/20 13:09:13 by ezonda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,9 @@ void	move_right(t_var *data)
 	else
 		data->pos = 1;
 	display(data);
+}
+
+void	move_down(t_var *data)
+{
+	
 }

@@ -6,7 +6,7 @@
 /*   By: ezonda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/15 15:07:52 by ezonda            #+#    #+#             */
-/*   Updated: 2019/06/14 10:37:53 by ezonda           ###   ########.fr       */
+/*   Updated: 2019/06/20 13:37:52 by ezonda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,10 @@
 # include <termcap.h>
 # include <termios.h>
 # include <signal.h>
+# include <sys/ioctl.h>
 
 struct termios	term;
+struct winsize	wind;;
 
 typedef struct	s_var
 {
@@ -28,6 +30,9 @@ typedef struct	s_var
 	int nb_args;
 	char **args;
 	char **selected;
+	int char_count;
+	int nb_cols;
+	int nb_row;
 }				t_var;
 
 void	display(t_var *data);
@@ -48,5 +53,7 @@ char	**ft_tabdup(char **tab);
 void	init_data(t_var *data);
 
 int		hide_cursor(int mod);
+
+void	check_winsize(t_var *data);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ezonda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/15 15:16:59 by ezonda            #+#    #+#             */
-/*   Updated: 2019/06/14 13:34:46 by ezonda           ###   ########.fr       */
+/*   Updated: 2019/06/20 14:04:59 by ezonda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,10 @@ static int		return_selection(t_var *data)
 	ft_printf("\n");
 	if (!data->selected)
 		return (0);
+//	while (data->selected[i])
+//		ft_printf("%s ", data->selected[i++]);
 	while (data->selected[i])
-		ft_printf("%s ", data->selected[i++]);
+		ft_putstr_fd(data->selected[i++], 0);
 	return (0);
 }
 
@@ -56,6 +58,33 @@ static void		get_arrow(t_var *data, char c)
 		move_left(data);
 }
 
+int		ft_round(double nb)
+{
+	return (nb + 0.5);
+}
+
+void	check_winsize(t_var *data)
+{
+	int i;
+	int nb_cols;
+
+	i = 0;
+	data->char_count = 0;
+	while (data->args[i])
+	{
+		data->char_count += ft_strlen(data->args[i]);
+		ft_printf("char_count : %d\n", data->char_count);
+		i++;
+	}
+//	ft_printf("i : %d\n", i);
+//	data->char_count += i;
+	ioctl(STDOUT_FILENO, TIOCGWINSZ, &wind);
+	ft_printf("\nchar_count : %d\n", data->char_count);
+	ft_printf("nb_cols : %d\n", wind.ws_col);
+//	data->nb_row = ft_round(res);
+	data->nb_row = wind.ws_row;
+	ft_printf("nb_row : %d\n", data->nb_row);
+}
 
 void	set_termcanon(t_var *data)
 {
@@ -71,9 +100,11 @@ void	set_termcanon(t_var *data)
 	hide_cursor(0);
 	clear_display(data);
 	display(data);
+//	ioctl(STDOUT_FILENO, TIOCGWINSZ, &wind);
+//	ft_printf("\nlines : %d\n", wind.ws_row);
+//	ft_printf("colums : %d\n", wind.ws_col);
+	check_winsize(data);
 }
-
-
 
 static void		get_key(t_var *data)
 {
@@ -110,8 +141,9 @@ int				main(int ac, char **av, char **env)
 	t_var			data;
 
 	signal(SIGINT, signal_handler);
-//	signal(SIGCONT, signal_handler);
-//	signal(SIGTSTP, signal_handler);
+	signal(SIGWINCH, signal_handler);
+	signal(SIGTSTP, signal_handler);
+	ft_printf("here\n");
 	if (!getenv("TERM"))
 		return (ft_printf("ft_select : environment not found\n"));
 	data.args = ft_tabdup(av);
