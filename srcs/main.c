@@ -6,7 +6,7 @@
 /*   By: ezonda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/15 15:16:59 by ezonda            #+#    #+#             */
-/*   Updated: 2019/06/20 14:04:59 by ezonda           ###   ########.fr       */
+/*   Updated: 2019/06/23 12:38:11 by ezonda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,37 +51,31 @@ static void		get_arrow(t_var *data, char c)
 	if (c == 65)
 		ft_printf("UP\n");
 	if (c == 66)
-		ft_printf("DOWN\n");
+		move_down(data);
 	if (c == 67)
 		move_right(data);
 	if (c == 68)
 		move_left(data);
 }
 
-int		ft_round(double nb)
-{
-	return (nb + 0.5);
-}
-
 void	check_winsize(t_var *data)
 {
 	int i;
-	int nb_cols;
 
-	i = 0;
+	i = 1;
 	data->char_count = 0;
 	while (data->args[i])
 	{
 		data->char_count += ft_strlen(data->args[i]);
-		ft_printf("char_count : %d\n", data->char_count);
+		ft_printf("\nchar : %s\n", data->args[i]);
 		i++;
 	}
 //	ft_printf("i : %d\n", i);
 //	data->char_count += i;
 	ioctl(STDOUT_FILENO, TIOCGWINSZ, &wind);
-	ft_printf("\nchar_count : %d\n", data->char_count);
+	ft_printf("\ncount : %d\n", data->char_count + i);
 	ft_printf("nb_cols : %d\n", wind.ws_col);
-//	data->nb_row = ft_round(res);
+	data->nb_cols = wind.ws_col;
 	data->nb_row = wind.ws_row;
 	ft_printf("nb_row : %d\n", data->nb_row);
 }

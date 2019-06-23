@@ -6,7 +6,7 @@
 /*   By: ezonda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 10:19:29 by ezonda            #+#    #+#             */
-/*   Updated: 2019/06/20 13:09:13 by ezonda           ###   ########.fr       */
+/*   Updated: 2019/06/23 12:38:10 by ezonda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,49 @@ void	move_right(t_var *data)
 	display(data);
 }
 
+int		count_words(t_var *data)
+{
+	int i;
+	int count;
+
+	i = 1;
+	count = 0;
+	while (count < data->nb_cols)
+	{
+		count += ft_strlen(data->args[i]);
+		i++;
+		ft_printf("here\n");
+	}
+	ft_printf("\n\nCOUNT : %d\n", count + i);
+	i -= 2;
+	ft_printf("\n i: %d\n", i);
+	return (i);
+}
+
+void	move_up(t_var *data)
+{
+	int i;
+
+	if (data->char_count < data->nb_cols)
+		return ;
+	 i = count_words(data);
+	if (data->pos + i < data->nb_args)
+		data->pos += i;
+	else
+		data->pos = 1 + i;
+	display(data);
+}
+
 void	move_down(t_var *data)
 {
-	
+	int i;
+
+	if (data->char_count < data->nb_cols)
+		return ;
+	 i = count_words(data);
+	if (data->pos + i < data->nb_args)
+		data->pos += i;
+	else
+		data->pos = 1 + i;
+	display(data);
 }
