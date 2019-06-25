@@ -6,7 +6,7 @@
 /*   By: ezonda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/15 15:16:59 by ezonda            #+#    #+#             */
-/*   Updated: 2019/06/23 12:38:11 by ezonda           ###   ########.fr       */
+/*   Updated: 2019/06/25 01:15:06 by ezonda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int		return_selection(t_var *data)
 static void		get_arrow(t_var *data, char c)
 {
 	if (c == 65)
-		ft_printf("UP\n");
+		move_up(data);
 	if (c == 66)
 		move_down(data);
 	if (c == 67)
@@ -67,11 +67,8 @@ void	check_winsize(t_var *data)
 	while (data->args[i])
 	{
 		data->char_count += ft_strlen(data->args[i]);
-		ft_printf("\nchar : %s\n", data->args[i]);
 		i++;
 	}
-//	ft_printf("i : %d\n", i);
-//	data->char_count += i;
 	ioctl(STDOUT_FILENO, TIOCGWINSZ, &wind);
 	ft_printf("\ncount : %d\n", data->char_count + i);
 	ft_printf("nb_cols : %d\n", wind.ws_col);
@@ -83,6 +80,7 @@ void	check_winsize(t_var *data)
 void	set_termcanon(t_var *data)
 {
 	char buffer[256];
+	static int update;
 
 	if (tgetent(buffer, getenv("TERM")) <= 0)
 		return ;
@@ -93,20 +91,30 @@ void	set_termcanon(t_var *data)
 		return ;
 	hide_cursor(0);
 	clear_display(data);
-	display(data);
-//	ioctl(STDOUT_FILENO, TIOCGWINSZ, &wind);
-//	ft_printf("\nlines : %d\n", wind.ws_row);
-//	ft_printf("colums : %d\n", wind.ws_col);
 	check_winsize(data);
+	display(data);
+	ft_printf("\nUpdate %d\n", update++);
 }
 
-static void		get_key(t_var *data)
+void			update_data(int mod, t_var *data)
+{
+	static t_var *data2;
+
+	ft_printf("\nUPDATE\n");
+	if (mod == 1 && data2 != NULL)
+		get_key(data2);
+	else
+		data2 = data;
+}
+
+void		get_key(t_var *data)
 {
 	char buffer[6];
 	char *res;
 
 	while (1)
 	{
+		update_data(0, data);
 		set_termcanon(data);
 		ft_bzero(buffer, 6);
 		read(0, &buffer, sizeof(buffer));

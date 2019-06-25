@@ -6,7 +6,7 @@
 /*   By: ezonda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/15 15:07:52 by ezonda            #+#    #+#             */
-/*   Updated: 2019/06/23 08:23:37 by ezonda           ###   ########.fr       */
+/*   Updated: 2019/06/25 01:01:34 by ezonda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	remove_arg(t_var *data);
 void	move_left(t_var *data);
 void	move_right(t_var *data);
 void	move_down(t_var *data);
+void	move_up(t_var *data);
 
 void	signal_handler(int signal);
 int		ft_putchar_v2(int c);
@@ -56,5 +57,11 @@ void	init_data(t_var *data);
 int		hide_cursor(int mod);
 
 void	check_winsize(t_var *data);
+
+int		count_words(t_var *data);
+
+void	update_data(int mod, t_var *data);
+
+void	get_key(t_var *data);
 
 #endif

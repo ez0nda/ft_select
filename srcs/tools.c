@@ -6,7 +6,7 @@
 /*   By: ezonda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 10:07:37 by ezonda            #+#    #+#             */
-/*   Updated: 2019/06/20 14:10:10 by ezonda           ###   ########.fr       */
+/*   Updated: 2019/06/25 01:25:13 by ezonda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,6 @@
 void	signal_handler(int signal)
 {
 	pid_t pid;
-//	(void)signal;
-//	ft_printf("\nsig : %d\n", signal);
-//	if (signal == 18)
-//		kill(pid, SIGTSTP);
-//	else
 	if (signal == SIGTSTP)
 	{
 		hide_cursor(1);
@@ -28,9 +23,10 @@ void	signal_handler(int signal)
 	else if (signal == SIGWINCH)
 	{
 		ioctl(STDOUT_FILENO, TIOCGWINSZ, &wind);
-		ft_printf("\nlines : %d\n", wind.ws_row);
-		ft_printf("colums : %d\n", wind.ws_col);
-		return ;
+//		ft_printf("\nlines : %d\n", wind.ws_row);
+//		ft_printf("colums : %d\n", wind.ws_col);
+		ft_printf("\nSIGWINCH\n");
+		update_data(1, NULL);
 	}
 	else
 		exit(hide_cursor(1));

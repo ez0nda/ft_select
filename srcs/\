@@ -6,7 +6,7 @@
 /*   By: ezonda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 10:19:29 by ezonda            #+#    #+#             */
-/*   Updated: 2019/06/25 02:41:58 by ezonda           ###   ########.fr       */
+/*   Updated: 2019/06/24 21:11:22 by ezonda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	move_right(t_var *data)
 	display(data);
 }
 
-/*int		count_words(t_var *data)
+int		count_words(t_var *data)
 {
 	int i;
 	int count;
@@ -69,44 +69,25 @@ void	move_right(t_var *data)
 	{
 		count += ft_strlen(data->args[i]);
 		i++;
+		ft_printf("here\n");
 	}
+	ft_printf("\n\nCOUNT : %d\n", count + i);
 	i -= 2;
+	ft_printf("\n i: %d\n", i);
 	return (i);
-}
-*/
-int		count_words(t_var *data)
-{
-	int i;
-	int max_len;
-	int words;
-
-	i = 1;
-	max_len = 0;
-	while (data->args[i])
-	{
-		if (ft_strlen(data->args[i]) > max_len)
-			max_len = ft_strlen(data->args[i]);
-		i++;
-	}
-	words = data->nb_cols / max_len;
-	return (words);
 }
 
 void	move_up(t_var *data)
 {
 	int i;
 
-	clear_display(data);
 	if (data->char_count < data->nb_cols)
 		return ;
-	i = count_words(data);
-	if (data->pos - i > 0)
-		data->pos -= i;
+	 i = count_words(data);
+	if (data->pos + i < data->nb_args)
+		data->pos += i;
 	else
-	{
-		while (data->pos + i <= data->nb_args)
-			data->pos += i;
-	}
+		data->pos = 1 + i;
 	display(data);
 }
 
@@ -114,16 +95,13 @@ void	move_down(t_var *data)
 {
 	int i;
 
-	clear_display(data);
 	if (data->char_count < data->nb_cols)
 		return ;
-	i = count_words(data);
-	if (data->pos + i <= data->nb_args)
+	 i = count_words(data);
+	if (data->pos + i < data->nb_args)
 		data->pos += i;
 	else
-	{
-		while (data->pos > i)
-			data->pos -= i;
-	}
+		data->pos = 1;
 	display(data);
+	ft_printf("i : %d\n", i);
 }
