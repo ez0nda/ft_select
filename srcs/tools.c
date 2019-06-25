@@ -6,7 +6,7 @@
 /*   By: ezonda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 10:07:37 by ezonda            #+#    #+#             */
-/*   Updated: 2019/06/25 01:25:13 by ezonda           ###   ########.fr       */
+/*   Updated: 2019/06/26 00:23:34 by ezonda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,29 @@
 
 void	signal_handler(int signal)
 {
-	pid_t pid;
+	static t_var *data;
+	pid_t	pid;
+
 	if (signal == SIGTSTP)
 	{
+		data = update_data(1, data);
 		hide_cursor(1);
-		kill(pid, SIGTSTP);
+		term.c_lflag &= (~(ICANON | ECHO));
+//		signal(SIGTSTP, SIG_DFL);
+		ioctl(0, TIOCSTI, &term);
 	}
 	else if (signal == SIGWINCH)
 	{
-		ioctl(STDOUT_FILENO, TIOCGWINSZ, &wind);
+//		ioctl(STDOUT_FILENO, TIOCGWINSZ, &wind);
+		data = update_data(1, data);
+		
 //		ft_printf("\nlines : %d\n", wind.ws_row);
 //		ft_printf("colums : %d\n", wind.ws_col);
 		ft_printf("\nSIGWINCH\n");
-		update_data(1, NULL);
+//		update_data(1, NULL);
+		clear_display(data);
+		check_winsize(data);
+		display(data);
 	}
 	else
 		exit(hide_cursor(1));
@@ -80,5 +90,5 @@ void	init_data(t_var *data)
 	data->pos = 1;
 	data->char_count = 0;
 	data->nb_cols = 0;
-	data->nb_row = 0;
+	data->nb_rows = 0;
 }

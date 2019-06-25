@@ -6,7 +6,7 @@
 /*   By: ezonda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/15 15:07:52 by ezonda            #+#    #+#             */
-/*   Updated: 2019/06/25 01:01:34 by ezonda           ###   ########.fr       */
+/*   Updated: 2019/06/26 00:11:23 by ezonda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct	s_var
 	char **selected;
 	int char_count;
 	int nb_cols;
-	int nb_row;
+	int nb_rows;
 }				t_var;
 
 void	display(t_var *data);
@@ -60,7 +60,7 @@ void	check_winsize(t_var *data);
 
 int		count_words(t_var *data);
 
-void	update_data(int mod, t_var *data);
+t_var	*update_data(int mod, t_var *data);
 
 void	get_key(t_var *data);
 

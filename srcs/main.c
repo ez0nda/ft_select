@@ -6,7 +6,7 @@
 /*   By: ezonda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/15 15:16:59 by ezonda            #+#    #+#             */
-/*   Updated: 2019/06/25 01:15:06 by ezonda           ###   ########.fr       */
+/*   Updated: 2019/06/26 01:17:09 by ezonda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,19 @@ int		hide_cursor(int mod)
 	return (0);
 }
 
+void	exit_term(t_var *data)
+{
+	if (tcgetattr(0, &term) == -1)
+		return ;
+	term.c_lflag &= (~(ICANON | ECHO));
+	if (tcsetattr(0, TCSANOW, &term) == -1)
+		return ;
+}
+
 static int		return_selection(t_var *data)
 {
 	int i;
+	char *res;
 
 	i = 0;
 	ft_printf("\n");
@@ -41,8 +51,15 @@ static int		return_selection(t_var *data)
 		return (0);
 //	while (data->selected[i])
 //		ft_printf("%s ", data->selected[i++]);
+//	if ((res = tgetstr("so", NULL)) == NULL)
+//		return (0);
+//	tputs(res, 1, ft_putchar_v2);
+	exit_term(data);
 	while (data->selected[i])
-		ft_putstr_fd(data->selected[i++], 0);
+		ft_putstr_fd(data->selected[i++], 1);
+//	if ((res = tgetstr("se", NULL)) == NULL)
+//		return (0);
+//	tputs(res, 1, ft_putchar_v2);
 	return (0);
 }
 
@@ -70,11 +87,13 @@ void	check_winsize(t_var *data)
 		i++;
 	}
 	ioctl(STDOUT_FILENO, TIOCGWINSZ, &wind);
-	ft_printf("\ncount : %d\n", data->char_count + i);
-	ft_printf("nb_cols : %d\n", wind.ws_col);
+//	ft_printf("\ncount : %d\n", data->char_count + i);
+//	ft_printf("nb_cols : %d\n", wind.ws_col);
 	data->nb_cols = wind.ws_col;
-	data->nb_row = wind.ws_row;
-	ft_printf("nb_row : %d\n", data->nb_row);
+	data->nb_rows = data->nb_args / count_words(data) + 0.5;
+//	ft_printf("nb_words : %d\n", count_words(data));
+//	ft_printf("nb_arg : %d\n", data->nb_args);
+//	ft_printf("nb_row : %d\n", data->nb_rows);
 }
 
 void	set_termcanon(t_var *data)
@@ -93,10 +112,10 @@ void	set_termcanon(t_var *data)
 	clear_display(data);
 	check_winsize(data);
 	display(data);
-	ft_printf("\nUpdate %d\n", update++);
+//	ft_printf("\nUpdate %d\n", update++);
 }
 
-void			update_data(int mod, t_var *data)
+/***void			update_data(int mod, t_var *data)
 {
 	static t_var *data2;
 
@@ -105,6 +124,15 @@ void			update_data(int mod, t_var *data)
 		get_key(data2);
 	else
 		data2 = data;
+}*/
+
+t_var		*update_data(int mod, t_var *data)
+{
+	static t_var *data2;
+
+	if (mod == 0)
+		data2 = data;
+	return (data2);
 }
 
 void		get_key(t_var *data)
@@ -145,7 +173,6 @@ int				main(int ac, char **av, char **env)
 	signal(SIGINT, signal_handler);
 	signal(SIGWINCH, signal_handler);
 	signal(SIGTSTP, signal_handler);
-	ft_printf("here\n");
 	if (!getenv("TERM"))
 		return (ft_printf("ft_select : environment not found\n"));
 	data.args = ft_tabdup(av);

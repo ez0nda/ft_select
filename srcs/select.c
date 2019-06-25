@@ -6,7 +6,7 @@
 /*   By: ezonda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 16:43:19 by ezonda            #+#    #+#             */
-/*   Updated: 2019/06/14 11:46:27 by ezonda           ###   ########.fr       */
+/*   Updated: 2019/06/26 00:53:06 by ezonda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,7 @@ static int		add_to_selection(t_var *data)
 	while (data->selected[i])
 	{
 		if (!ft_strcmp(data->selected[i], data->args[data->pos]))
-		{
-			ft_printf("here\n");
 			return (remove_selection(data, i));
-		}
 		i++;
 	}
 	data->selected[i++] = ft_strdup(data->args[data->pos]);

@@ -6,7 +6,7 @@
 /*   By: ezonda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 14:13:56 by ezonda            #+#    #+#             */
-/*   Updated: 2019/06/25 02:28:00 by ezonda           ###   ########.fr       */
+/*   Updated: 2019/06/26 00:22:03 by ezonda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,11 @@ void			display(t_var *data)
 	i = 1;
 	count = 0;
 	width = count_words(data);
+	if (width == 0 || wind.ws_row < data->nb_rows)
+	{
+		ft_printf("Window too small");
+		return ;
+	}
 	while (data->args[i] && i < data->pos)
 	{
 		if (count == width)
