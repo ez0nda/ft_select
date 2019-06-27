@@ -6,7 +6,7 @@
 /*   By: ezonda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/15 15:07:52 by ezonda            #+#    #+#             */
-/*   Updated: 2019/06/26 00:11:23 by ezonda           ###   ########.fr       */
+/*   Updated: 2019/06/27 22:24:48 by ezonda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int		hide_cursor(int mod);
 
 void	check_winsize(t_var *data);
 
-int		count_words(t_var *data);
+double		count_words(t_var *data);
 
 t_var	*update_data(int mod, t_var *data);
 

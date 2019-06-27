@@ -6,7 +6,7 @@
 /*   By: ezonda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 14:13:56 by ezonda            #+#    #+#             */
-/*   Updated: 2019/06/26 00:22:03 by ezonda           ###   ########.fr       */
+/*   Updated: 2019/06/27 22:34:01 by ezonda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,9 @@ void			default_display(t_var *data)
 static void		print_args(t_var *data, int index)
 {
 	char *res;
-//	int width;
-//	static int i;
 
-//	width = count_words(data);
 	if (check_selection(data, data->args[index]))
 	{
-//		if (i == width)
-//			ft_printf("\n");
 		if ((res = tgetstr("mr", NULL)) == NULL)
 			return ;
 		tputs(res, 0, ft_putchar_v2);
@@ -64,16 +59,7 @@ static void		print_args(t_var *data, int index)
 		tputs(res, 0, ft_putchar_v2);
 	}
 	else
-	{
-//		if (i == width)
-//			ft_printf("\n");
 		ft_printf("%s", data->args[index]);
-	}
-//	if (i == width)
-//		i = 0;
-//	ft_printf("i = %d", i);
-//	ft_printf("width = %d", width);
-//	i++;
 }
 
 void			display(t_var *data)
