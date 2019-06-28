@@ -6,7 +6,7 @@
 /*   By: ezonda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 10:19:29 by ezonda            #+#    #+#             */
-/*   Updated: 2019/06/27 22:34:24 by ezonda           ###   ########.fr       */
+/*   Updated: 2019/06/28 23:31:53 by ezonda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,24 +56,6 @@ void	move_right(t_var *data)
 	else
 		data->pos = 1;
 	display(data);
-}
-
-double	count_words(t_var *data)
-{
-	int i;
-	int max_len;
-	int words;
-
-	i = 1;
-	max_len = 0;
-	while (data->args[i])
-	{
-		if (ft_strlen(data->args[i]) > max_len)
-			max_len = ft_strlen(data->args[i]);
-		i++;
-	}
-	words = data->nb_cols / max_len;
-	return (words);
 }
 
 void	move_up(t_var *data)

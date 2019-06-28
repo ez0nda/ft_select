@@ -6,7 +6,7 @@
 /*   By: ezonda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/15 15:07:52 by ezonda            #+#    #+#             */
-/*   Updated: 2019/06/27 22:24:48 by ezonda           ###   ########.fr       */
+/*   Updated: 2019/06/28 23:28:15 by ezonda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,9 @@ double		count_words(t_var *data);
 t_var	*update_data(int mod, t_var *data);
 
 void	get_key(t_var *data);
+
+void	exit_term(t_var *data);
+
+void	set_termcanon(t_var *data);
 
 #endif
