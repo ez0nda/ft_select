@@ -6,7 +6,7 @@
 /*   By: ezonda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/15 15:16:59 by ezonda            #+#    #+#             */
-/*   Updated: 2019/06/28 23:30:51 by ezonda           ###   ########.fr       */
+/*   Updated: 2019/06/29 01:03:58 by ezonda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,11 @@ static int		return_selection(t_var *data)
 	tputs(res, 0, ft_putchar_v2);
 	while (data->selected[i])
 	{
-		ft_printf("%s", data->selected[i++]);
+		ft_putstr_fd(data->selected[i++], STDIN_FILENO);
+		//		ft_printf("%s", data->selected[i++]);
 		if (data->selected[i] != NULL)
-			ft_printf(" ");
+			ft_putchar_fd(' ', STDIN_FILENO);
+			//			ft_printf(" ");
 	}
 	exit(0);
 }
