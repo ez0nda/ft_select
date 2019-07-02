@@ -6,7 +6,7 @@
 /*   By: ezonda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/15 15:07:52 by ezonda            #+#    #+#             */
-/*   Updated: 2019/06/28 23:28:15 by ezonda           ###   ########.fr       */
+/*   Updated: 2019/07/01 22:50:58 by ezonda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	move_right(t_var *data);
 void	move_down(t_var *data);
 void	move_up(t_var *data);
 
-void	signal_handler(int signal);
+void	signal_handler(void);
 int		ft_putchar_v2(int c);
 void	free_tab(char **tab);
 char	**ft_tabdup(char **tab);
@@ -67,5 +67,7 @@ void	get_key(t_var *data);
 void	exit_term(t_var *data);
 
 void	set_termcanon(t_var *data);
+
+int		manage_selection(t_var *data);
 
 #endif

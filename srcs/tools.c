@@ -6,7 +6,7 @@
 /*   By: ezonda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 10:07:37 by ezonda            #+#    #+#             */
-/*   Updated: 2019/06/28 23:24:18 by ezonda           ###   ########.fr       */
+/*   Updated: 2019/07/02 01:55:28 by ezonda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		ft_putchar_v2(int c)
 {
-	write(1, &c, 1);
+	write(0, &c, 1);
 	return (c);
 }
 
@@ -59,6 +59,7 @@ void	init_data(t_var *data)
 	data->nb_args--;
 	data->pos = 1;
 	data->char_count = 0;
-	data->nb_cols = 0;
+	ioctl(STDIN_FILENO, TIOCGWINSZ, &wind);
+	data->nb_cols = wind.ws_col;
 	data->nb_rows = 0;
 }

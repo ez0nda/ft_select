@@ -6,7 +6,7 @@
 /*   By: ezonda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 14:13:56 by ezonda            #+#    #+#             */
-/*   Updated: 2019/06/27 22:34:01 by ezonda           ###   ########.fr       */
+/*   Updated: 2019/07/02 02:25:42 by ezonda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,15 @@ void			default_display(t_var *data)
 		if ((res = tgetstr("us", NULL)) == NULL)
 			return ;
 		tputs(res, 0, ft_putchar_v2);
-		ft_printf("%s", data->args[data->pos]);
+		ft_putstr_fd(data->args[data->pos], STDIN_FILENO);
 		if ((res = tgetstr("ue", NULL)) == NULL)
 			return ;
 		tputs(res, 0, ft_putchar_v2);
 		while (data->args[i])
-			ft_printf(" %s", data->args[i++]);
+		{
+			ft_putchar_fd(32, STDIN_FILENO);
+			ft_putstr_fd(data->args[i++], STDIN_FILENO);
+		}
 	}
 }
 
@@ -53,13 +56,13 @@ static void		print_args(t_var *data, int index)
 		if ((res = tgetstr("mr", NULL)) == NULL)
 			return ;
 		tputs(res, 0, ft_putchar_v2);
-		ft_printf("%s", data->args[index]);
+		ft_putstr_fd(data->args[index], STDIN_FILENO);
 		if ((res = tgetstr("me", NULL)) == NULL)
 			return ;
 		tputs(res, 0, ft_putchar_v2);
 	}
 	else
-		ft_printf("%s", data->args[index]);
+		ft_putstr_fd(data->args[index], STDIN_FILENO);
 }
 
 void			display(t_var *data)
@@ -72,26 +75,32 @@ void			display(t_var *data)
 	i = 1;
 	count = 0;
 	width = count_words(data);
+/*	ft_putnbr_fd(width, 0);
+	ft_putchar_fd('\n', STDIN_FILENO);
+	ft_putnbr_fd(wind.ws_row, 0);
+	ft_putchar_fd('\n', STDIN_FILENO);
+	ft_putnbr_fd(data->nb_rows, 0);
+	ft_putchar_fd('\n', STDIN_FILENO);*/
 	if (width == 0 || wind.ws_row < data->nb_rows)
 	{
-		ft_printf("Window too small");
+		ft_putstr_fd("Window too small", STDIN_FILENO);
 		return ;
 	}
 	while (data->args[i] && i < data->pos)
 	{
 		if (count == width)
 		{
-			ft_printf("\n");
+			ft_putchar_fd('\n', STDIN_FILENO);
 			count = 0;;
 		}
 		print_args(data, i);
-		ft_printf(" ");
+		ft_putchar_fd(32, STDIN_FILENO);
 		i++;
 		count++;
 	}
 	if (count == width)
 	{
-		ft_printf("\n");
+		ft_putchar_fd('\n', STDIN_FILENO);
 		count = 0;;
 	}
 	count++;
@@ -102,17 +111,17 @@ void			display(t_var *data)
 	if ((res = tgetstr("ue", NULL)) == NULL)
 		return ;
 	tputs(res, 0, ft_putchar_v2);
-	ft_printf(" ");
+	ft_putchar_fd(32, STDIN_FILENO);
 	i = data->pos + 1;
 	while (data->args[i] && i <= data->nb_args)
 	{
 		if (count == width)
 		{
-			ft_printf("\n");
+			ft_putchar_fd('\n', STDIN_FILENO);
 			count = 0;;
 		}
 		print_args(data, i);
-		ft_printf(" ");
+		ft_putchar_fd(32, STDIN_FILENO);
 		i++;
 		count++;
 	}

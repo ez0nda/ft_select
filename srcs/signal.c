@@ -6,31 +6,70 @@
 /*   By: ezonda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/28 23:21:17 by ezonda            #+#    #+#             */
-/*   Updated: 2019/06/28 23:22:18 by ezonda           ###   ########.fr       */
+/*   Updated: 2019/07/02 02:26:25 by ezonda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_select.h"
 
-void	signal_handler(int signal)
+static void		signal_quit(int sig)
 {
-	static t_var *data;
-	pid_t	pid;
+	t_var *data;
 
-	if (signal == SIGTSTP)
+	(void)sig;
+	data = update_data(1, data);
+	hide_cursor(1);
+	exit(EXIT_FAILURE);
+}
+
+static void		signal_inter(int sig)
+{
+	t_var *data;
+
+	(void)sig;
+	data = update_data(1, data);
+	signal(SIGTSTP, SIG_DFL);
+	ioctl(STDIN_FILENO, TIOCSTI, "\x1A");
+	hide_cursor(1);
+}
+
+static void		signal_restart(int sig)
+{
+	t_var *data;
+
+	(void)sig;
+	data = update_data(1, data);
+	hide_cursor(0);
+	set_termcanon(data);
+	signal(SIGTSTP, signal_inter);
+}
+
+static void		signal_resize(int sig)
+{
+	t_var *data;
+
+	(void)sig;
+	data = update_data(1, data);
+	clear_display(data);
+	check_winsize(data);
+	display(data);
+	check_winsize(data);
+}
+
+void			signal_handler(void)
+{
+	unsigned int sig;
+
+	sig = 0;
+	while (++sig < 32)
 	{
-		data = update_data(1, data);
-		hide_cursor(1);
-		exit_term(data);
+		if (sig == SIGINT)
+			signal(sig, signal_quit);
+		if (sig == SIGTSTP)
+			signal(sig, signal_inter);
+		if (sig == SIGCONT)
+			signal(sig, signal_restart);
+		if (sig == SIGWINCH)
+			signal(sig, signal_resize);
 	}
-	else if (signal == SIGWINCH)
-	{
-		data = update_data(1, data);
-		clear_display(data);
-		check_winsize(data);
-		display(data);
-		check_winsize(data);
-	}
-	else
-		exit(hide_cursor(1));
 }

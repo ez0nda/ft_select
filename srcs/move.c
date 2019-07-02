@@ -6,7 +6,7 @@
 /*   By: ezonda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 10:19:29 by ezonda            #+#    #+#             */
-/*   Updated: 2019/06/28 23:54:24 by ezonda           ###   ########.fr       */
+/*   Updated: 2019/07/02 01:05:36 by ezonda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,14 @@
 void	remove_arg(t_var *data)
 {
 	int		i;
-	char	*res;
 	char	**tmp;
 
 	i = data->pos;
 	clear_display(data);
 	if (data->nb_args == 1)
 		exit(hide_cursor(1));
+	if (check_selection(data, data->args[i]))
+		manage_selection(data);
 	free(data->args[i]);
 	while (data->args[i])
 	{
@@ -62,6 +63,8 @@ void	move_up(t_var *data)
 {
 	int i;
 
+	if (data->nb_rows == 1)
+		return ;
 	clear_display(data);
 	if (data->char_count < data->nb_cols)
 		return ;
@@ -80,6 +83,8 @@ void	move_down(t_var *data)
 {
 	int i;
 
+	if (data->nb_rows == 1)
+		return ;
 	clear_display(data);
 	if (data->char_count < data->nb_cols)
 		return ;

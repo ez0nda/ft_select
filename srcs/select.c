@@ -6,13 +6,13 @@
 /*   By: ezonda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 16:43:19 by ezonda            #+#    #+#             */
-/*   Updated: 2019/06/26 00:53:06 by ezonda           ###   ########.fr       */
+/*   Updated: 2019/07/01 22:51:17 by ezonda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_select.h"
 
-static int		remove_selection(t_var *data, int index)
+int		remove_selection(t_var *data, int index)
 {
 	while (data->selected[index])
 	{
@@ -23,7 +23,7 @@ static int		remove_selection(t_var *data, int index)
 	return (0);
 }
 
-static int		add_to_selection(t_var *data)
+int		manage_selection(t_var *data)
 {
 	int i;
 
@@ -58,7 +58,7 @@ int		check_selection(t_var *data, char *str)
 void	select_arg(t_var *data)
 {
 	clear_display(data);
-	add_to_selection(data);
+	manage_selection(data);
 	if (data->pos < data->nb_args)
 		data->pos++;
 	else

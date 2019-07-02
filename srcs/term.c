@@ -6,7 +6,7 @@
 /*   By: ezonda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/28 23:26:44 by ezonda            #+#    #+#             */
-/*   Updated: 2019/06/28 23:31:55 by ezonda           ###   ########.fr       */
+/*   Updated: 2019/07/02 02:27:47 by ezonda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	check_winsize(t_var *data)
 		data->char_count += ft_strlen(data->args[i]);
 		i++;
 	}
-	ioctl(STDOUT_FILENO, TIOCGWINSZ, &wind);
+	ioctl(STDIN_FILENO, TIOCGWINSZ, &wind);
 	data->nb_cols = wind.ws_col;
 	data->nb_rows = data->nb_args / count_words(data) + 1;
 }
@@ -79,7 +79,6 @@ void	check_winsize(t_var *data)
 void	set_termcanon(t_var *data)
 {
 	char buffer[256];
-	static int update;
 
 	if (tgetent(buffer, getenv("TERM")) <= 0)
 		return ;
