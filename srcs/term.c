@@ -6,7 +6,7 @@
 /*   By: ezonda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/28 23:26:44 by ezonda            #+#    #+#             */
-/*   Updated: 2019/07/02 02:27:47 by ezonda           ###   ########.fr       */
+/*   Updated: 2019/07/02 23:28:05 by ezonda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ double	count_words(t_var *data)
 			max_len = ft_strlen(data->args[i]);
 		i++;
 	}
+	max_len++;
 	words = data->nb_cols / max_len;
 	return (words);
 }

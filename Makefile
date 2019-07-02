@@ -6,7 +6,7 @@
 #    By: ezonda <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/15 15:57:32 by ezonda            #+#    #+#              #
-#    Updated: 2019/06/28 23:28:59 by ezonda           ###   ########.fr        #
+#    Updated: 2019/07/02 22:30:17 by ezonda           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRC = srcs/main.c \
 	  srcs/signal.c \
 	  srcs/key.c \
 	  srcs/term.c \
+	  srcs/error.c \
 
 OBJ = srcs/main.o \
 	  srcs/display.o \
@@ -29,6 +30,7 @@ OBJ = srcs/main.o \
 	  srcs/signal.o \
 	  srcs/key.o \
 	  srcs/term.o \
+	  srcs/error.o \
 
 LIB = libft/libft.a
 

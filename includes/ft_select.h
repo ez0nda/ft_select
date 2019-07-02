@@ -6,7 +6,7 @@
 /*   By: ezonda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/15 15:07:52 by ezonda            #+#    #+#             */
-/*   Updated: 2019/07/01 22:50:58 by ezonda           ###   ########.fr       */
+/*   Updated: 2019/07/02 22:28:03 by ezonda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,7 @@ void	exit_term(t_var *data);
 void	set_termcanon(t_var *data);
 
 int		manage_selection(t_var *data);
+
+int		error(char *str);
 
 #endif

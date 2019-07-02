@@ -6,7 +6,7 @@
 /*   By: ezonda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/28 23:21:17 by ezonda            #+#    #+#             */
-/*   Updated: 2019/07/02 02:26:25 by ezonda           ###   ########.fr       */
+/*   Updated: 2019/07/02 22:16:57 by ezonda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void			signal_handler(void)
 	sig = 0;
 	while (++sig < 32)
 	{
-		if (sig == SIGINT)
+		if (sig == SIGINT || sig == SIGQUIT || sig == SIGTERM)
 			signal(sig, signal_quit);
 		if (sig == SIGTSTP)
 			signal(sig, signal_inter);
