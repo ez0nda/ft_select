@@ -6,11 +6,22 @@
 /*   By: ezonda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 10:07:37 by ezonda            #+#    #+#             */
-/*   Updated: 2019/07/02 01:55:28 by ezonda           ###   ########.fr       */
+/*   Updated: 2019/07/03 00:16:16 by ezonda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_select.h"
+
+int		error(char *str)
+{
+	if (!ft_strcmp(str, "env"))
+		ft_putendl_fd("ft_select : environment not found", STDERR_FILENO);
+	if (!ft_strcmp(str, "usage"))
+		ft_putendl_fd("usage: ./ft_select [file ...]", STDERR_FILENO);
+	if (!ft_strcmp(str, "tty"))
+		ft_putendl_fd("file descriptor is not a tty", STDERR_FILENO);
+	return (0);
+}
 
 int		ft_putchar_v2(int c)
 {
