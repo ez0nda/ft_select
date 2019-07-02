@@ -6,7 +6,7 @@
 /*   By: ezonda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 10:19:29 by ezonda            #+#    #+#             */
-/*   Updated: 2019/07/02 01:05:36 by ezonda           ###   ########.fr       */
+/*   Updated: 2019/07/03 00:35:19 by ezonda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,6 @@ void	move_up(t_var *data)
 	if (data->nb_rows == 1)
 		return ;
 	clear_display(data);
-	if (data->char_count < data->nb_cols)
-		return ;
 	i = count_words(data);
 	if (data->pos - i > 0)
 		data->pos -= i;
@@ -86,8 +84,6 @@ void	move_down(t_var *data)
 	if (data->nb_rows == 1)
 		return ;
 	clear_display(data);
-	if (data->char_count < data->nb_cols)
-		return ;
 	i = count_words(data);
 	if (data->pos + i <= data->nb_args)
 		data->pos += i;
