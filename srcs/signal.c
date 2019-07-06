@@ -6,7 +6,7 @@
 /*   By: ezonda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/28 23:21:17 by ezonda            #+#    #+#             */
-/*   Updated: 2019/07/02 22:16:57 by ezonda           ###   ########.fr       */
+/*   Updated: 2019/07/06 04:09:31 by ezonda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static void		signal_quit(int sig)
 
 	(void)sig;
 	data = update_data(1, data);
+	;free_tab(data->args);
 	hide_cursor(1);
 	exit(EXIT_FAILURE);
 }
@@ -51,9 +52,9 @@ static void		signal_resize(int sig)
 	(void)sig;
 	data = update_data(1, data);
 	clear_display(data);
-	check_winsize(data);
+	get_winsize(data);
 	display(data);
-	check_winsize(data);
+	get_winsize(data);
 }
 
 void			signal_handler(void)

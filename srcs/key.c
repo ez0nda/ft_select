@@ -6,7 +6,7 @@
 /*   By: ezonda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/28 23:24:46 by ezonda            #+#    #+#             */
-/*   Updated: 2019/07/02 01:55:34 by ezonda           ###   ########.fr       */
+/*   Updated: 2019/07/06 04:03:44 by ezonda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void		get_arrow(t_var *data, char c)
 		move_left(data);
 }
 
-void		get_key(t_var *data)
+void			get_key(t_var *data)
 {
 	char buffer[6];
 

@@ -6,7 +6,7 @@
 /*   By: ezonda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 10:19:29 by ezonda            #+#    #+#             */
-/*   Updated: 2019/07/03 00:35:19 by ezonda           ###   ########.fr       */
+/*   Updated: 2019/07/06 03:22:00 by ezonda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	remove_arg(t_var *data)
 	clear_display(data);
 	if (data->nb_args == 1)
 		exit(hide_cursor(1));
-	if (check_selection(data, data->args[i]))
+	if (toggle_selection(data))
 		manage_selection(data);
 	free(data->args[i]);
 	while (data->args[i])

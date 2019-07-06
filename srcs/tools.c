@@ -6,7 +6,7 @@
 /*   By: ezonda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 10:07:37 by ezonda            #+#    #+#             */
-/*   Updated: 2019/07/03 00:16:16 by ezonda           ###   ########.fr       */
+/*   Updated: 2019/07/06 01:48:37 by ezonda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,18 @@ char	**ft_tabdup(char **tab)
 
 void	init_data(t_var *data)
 {
+	int i;
+
+	i = 0;
 	data->nb_args = 0;
 	while (data->args[data->nb_args])
 		data->nb_args++;
-	if (!(data->selected = (char**)malloc(sizeof(char*) * (data->nb_args + 1))))
-		return ;
-	data->selected[0] = NULL;
+	data->tab = malloc(sizeof(int) * data->nb_args);
+	while (i < data->nb_args)
+	{
+		data->tab[i] = 0;
+		i++;
+	}
 	data->nb_args--;
 	data->pos = 1;
 	data->char_count = 0;
