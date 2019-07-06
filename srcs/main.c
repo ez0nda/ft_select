@@ -6,7 +6,7 @@
 /*   By: ezonda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/15 15:16:59 by ezonda            #+#    #+#             */
-/*   Updated: 2019/07/06 04:30:12 by ezonda           ###   ########.fr       */
+/*   Updated: 2019/07/06 16:42:05 by ezonda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,14 @@ static int		return_selection(t_var *data)
 	{
 		if (data->tab[i] == 1)
 		{
-			ft_putstr_fd(data->args[i], STDOUT_FILENO);
 			output++;
-			if (output < count)
+			ft_putstr_fd(data->args[i], STDOUT_FILENO);
+			if (output <= count)
 				ft_putchar_fd(' ', STDOUT_FILENO);
 		}
 		i++;
 	}
+	free(data->tab);
 	free_tab(data->args);
 	return (hide_cursor(1));
 }

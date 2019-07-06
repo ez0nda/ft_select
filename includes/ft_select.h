@@ -6,7 +6,7 @@
 /*   By: ezonda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/15 15:07:52 by ezonda            #+#    #+#             */
-/*   Updated: 2019/07/06 04:50:15 by ezonda           ###   ########.fr       */
+/*   Updated: 2019/07/06 16:30:56 by ezonda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # define BOLD "\x1b[1m"
 # define RED "\x1b[91m"
 # define GREEN "\x1b[92m"
+# define WHITE "\x1b[97m"
 # define END "\x1b[0m"
 
 struct termios	term;

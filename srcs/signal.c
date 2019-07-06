@@ -6,7 +6,7 @@
 /*   By: ezonda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/28 23:21:17 by ezonda            #+#    #+#             */
-/*   Updated: 2019/07/06 04:09:31 by ezonda           ###   ########.fr       */
+/*   Updated: 2019/07/06 14:07:32 by ezonda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,15 @@ static void		signal_quit(int sig)
 
 	(void)sig;
 	data = update_data(1, data);
-	;free_tab(data->args);
+	free(data->tab);
+	free_tab(data->args);
 	hide_cursor(1);
 	exit(EXIT_FAILURE);
 }
 
 static void		signal_inter(int sig)
 {
-	t_var *data;
-
 	(void)sig;
-	data = update_data(1, data);
 	signal(SIGTSTP, SIG_DFL);
 	ioctl(STDIN_FILENO, TIOCSTI, "\x1A");
 	hide_cursor(1);
