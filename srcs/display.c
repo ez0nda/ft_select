@@ -6,7 +6,7 @@
 /*   By: ezonda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 14:13:56 by ezonda            #+#    #+#             */
-/*   Updated: 2019/07/06 04:31:45 by ezonda           ###   ########.fr       */
+/*   Updated: 2019/07/06 04:50:11 by ezonda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ static void		print_selected(t_var *data, int index)
 		if ((res = tgetstr("mr", NULL)) == NULL)
 			return ;
 		tputs(res, 0, ft_putchar_v2);
+		ft_putstr_fd(GREEN, STDIN_FILENO);
 		ft_putstr_fd(data->args[index], STDIN_FILENO);
+		ft_putstr_fd(END, STDIN_FILENO);
 		if ((res = tgetstr("me", NULL)) == NULL)
 			return ;
 		tputs(res, 0, ft_putchar_v2);
@@ -70,7 +72,9 @@ static void		print_position(t_var *data)
 	if ((res = tgetstr("us", NULL)) == NULL)
 		return ;
 	tputs(res, 0, ft_putchar_v2);
+	ft_putstr_fd(BOLD, STDIN_FILENO);
 	print_selected(data, data->pos);
+	ft_putstr_fd(END, STDIN_FILENO);
 	if ((res = tgetstr("ue", NULL)) == NULL)
 		return ;
 	tputs(res, 0, ft_putchar_v2);
