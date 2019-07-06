@@ -6,7 +6,7 @@
 /*   By: ezonda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/15 15:07:52 by ezonda            #+#    #+#             */
-/*   Updated: 2019/07/06 04:08:09 by ezonda           ###   ########.fr       */
+/*   Updated: 2019/07/06 04:29:50 by ezonda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,13 @@
 # include <termios.h>
 # include <signal.h>
 # include <sys/ioctl.h>
+
+# define END "\x1b[0m"
+# define BOLD "\x1b[1m"
+# define YELLOW "\x1b[33m"
+# define BLUE "\x1b[36m"
+# define CYAN "\x1b[36m"
+# define RED "\x1b[31m"
 
 struct termios	term;
 struct winsize	wind;;

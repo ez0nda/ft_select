@@ -6,7 +6,7 @@
 /*   By: ezonda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 14:13:56 by ezonda            #+#    #+#             */
-/*   Updated: 2019/07/06 03:16:02 by ezonda           ###   ########.fr       */
+/*   Updated: 2019/07/06 04:31:45 by ezonda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,10 @@ static int		check_winsize(t_var *data)
 	max_col = count_words(data);
 	if (max_col == 0 || wind.ws_row < data->nb_rows)
 	{
+		ft_putstr_fd(BOLD, STDIN_FILENO);
+		ft_putstr_fd(RED, STDIN_FILENO);
 		ft_putstr_fd("Window too small", STDIN_FILENO);
+		ft_putstr_fd(END, STDIN_FILENO);
 		return (0);
 	}
 	return (1);
