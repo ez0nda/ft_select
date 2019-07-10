@@ -6,7 +6,7 @@
 /*   By: ezonda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/28 23:21:17 by ezonda            #+#    #+#             */
-/*   Updated: 2019/07/06 14:07:32 by ezonda           ###   ########.fr       */
+/*   Updated: 2019/07/10 13:39:38 by ezonda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ static void		signal_quit(int sig)
 	data = update_data(1, data);
 	free(data->tab);
 	free_tab(data->args);
+	ft_putchar_fd('\n', STDIN_FILENO);
+	ft_putendl_fd("^C", STDIN_FILENO);
 	hide_cursor(1);
 	exit(EXIT_FAILURE);
 }

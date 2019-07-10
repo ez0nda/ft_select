@@ -6,7 +6,7 @@
 /*   By: ezonda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 10:07:37 by ezonda            #+#    #+#             */
-/*   Updated: 2019/07/06 01:48:37 by ezonda           ###   ########.fr       */
+/*   Updated: 2019/07/10 10:53:06 by ezonda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ void	init_data(t_var *data)
 	data->nb_args = 0;
 	while (data->args[data->nb_args])
 		data->nb_args++;
-	data->tab = malloc(sizeof(int) * data->nb_args);
+	if (!(data->tab = malloc(sizeof(int) * data->nb_args)))
+		return ;
 	while (i < data->nb_args)
 	{
 		data->tab[i] = 0;

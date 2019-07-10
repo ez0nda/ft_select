@@ -6,7 +6,7 @@
 /*   By: ezonda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/15 15:16:59 by ezonda            #+#    #+#             */
-/*   Updated: 2019/07/06 16:42:05 by ezonda           ###   ########.fr       */
+/*   Updated: 2019/07/10 11:01:08 by ezonda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int		count_selection(t_var *data)
 
 	i = 1;
 	count = 0;
-	while (i < data->nb_args)
+	while (i <= data->nb_args)
 	{
 		if (data->tab[i] == 1)
 			count++;
@@ -52,9 +52,11 @@ static int		return_selection(t_var *data)
 		if (data->tab[i] == 1)
 		{
 			output++;
+			ft_putstr_fd(GREEN, STDIN_FILENO);
 			ft_putstr_fd(data->args[i], STDOUT_FILENO);
-			if (output <= count)
+			if (count > output)
 				ft_putchar_fd(' ', STDOUT_FILENO);
+			ft_putstr_fd(END, STDIN_FILENO);
 		}
 		i++;
 	}
