@@ -6,7 +6,7 @@
 /*   By: ezonda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 10:07:37 by ezonda            #+#    #+#             */
-/*   Updated: 2019/07/10 10:53:06 by ezonda           ###   ########.fr       */
+/*   Updated: 2019/07/10 14:58:22 by ezonda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ int		error(char *str)
 		ft_putendl_fd("ft_select : environment not found", STDERR_FILENO);
 	if (!ft_strcmp(str, "usage"))
 		ft_putendl_fd("usage: ./ft_select [file ...]", STDERR_FILENO);
-	if (!ft_strcmp(str, "tty"))
-		ft_putendl_fd("file descriptor is not a tty", STDERR_FILENO);
 	return (0);
 }
 

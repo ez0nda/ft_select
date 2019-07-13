@@ -6,7 +6,7 @@
 /*   By: ezonda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/15 15:16:59 by ezonda            #+#    #+#             */
-/*   Updated: 2019/07/10 11:01:08 by ezonda           ###   ########.fr       */
+/*   Updated: 2019/07/13 14:57:51 by ezonda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,19 @@ t_var			*update_data(int mod, t_var *data)
 	if (mod == 0)
 		data2 = data;
 	return (data2);
+}
+
+static void		exit_term(t_var *data)
+{
+	char buffer[256];
+
+	if (tgetent(buffer, getenv("TERM")) <= 0)
+		return ;
+	if (tcgetattr(0, &term) == -1)
+		return ;
+	term.c_lflag &= (~(ICANON | ECHO));
+	if (tcsetattr(0, TCSANOW, &term) == -1)
+		return ;
 }
 
 static int		count_selection(t_var *data)
@@ -62,6 +75,7 @@ static int		return_selection(t_var *data)
 	}
 	free(data->tab);
 	free_tab(data->args);
+	exit_term(data);
 	return (hide_cursor(1));
 }
 

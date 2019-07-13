@@ -6,7 +6,7 @@
 /*   By: ezonda <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/28 23:21:17 by ezonda            #+#    #+#             */
-/*   Updated: 2019/07/10 13:39:38 by ezonda           ###   ########.fr       */
+/*   Updated: 2019/07/11 16:18:17 by ezonda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ static void		signal_quit(int sig)
 
 static void		signal_inter(int sig)
 {
+	t_var *data;
+
 	(void)sig;
+	data = update_data(1, data);
 	signal(SIGTSTP, SIG_DFL);
 	ioctl(STDIN_FILENO, TIOCSTI, "\x1A");
 	hide_cursor(1);
